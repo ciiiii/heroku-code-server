@@ -57,6 +57,15 @@ RUN cd /tmp && \
   mv code-server* /usr/local/lib/code-server && \
   ln -s /usr/local/lib/code-server/code-server /usr/local/bin/code-server
 
+RUN wget https://golang.org/dl/go1.16.3.linux-amd64.tar.gz && \
+  tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz && \
+  export PATH=$PATH:/usr/local/go/bin && \
+  mkdir /usr/local/gopath
+
+ENV GO111MODULE=on
+ENV GOPATH=/usr/local/gopath
+ENV GOROOT=/usr/local/go
+
 ENV PORT=8080
 EXPOSE 8080
 USER coder
